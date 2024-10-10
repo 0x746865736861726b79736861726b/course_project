@@ -8,7 +8,7 @@ down:
 	$(DOCKER_COMPOSE) down
 
 build:
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) build --no-cache
 
 restart:
 	$(DOCKER_COMPOSE) down
