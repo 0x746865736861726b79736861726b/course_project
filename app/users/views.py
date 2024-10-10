@@ -8,6 +8,11 @@ from users.factory import get_user_manager
 
 class UserCreateView(View):
     def get(self, request):
+        """
+        GET request handler.
+
+        Returns a rendered page with a form for creating a user.
+        """
         form = UserCreateForm()
         return render(
             request,
@@ -18,6 +23,15 @@ class UserCreateView(View):
         )
 
     def post(self, request):
+        """
+        POST request handler.
+
+        Handles the creation of a user.
+
+        Returns a JSON response with "success" status and the transaction receipt
+        if the user was created successfully. Otherwise, returns a JSON response with
+        "error" status and the corresponding error message.
+        """
         form = UserCreateForm(request.POST)
 
         if form.is_valid():
