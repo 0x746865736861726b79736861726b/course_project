@@ -1,0 +1,9 @@
+FROM trufflesuite/ganache-cli:latest
+
+WORKDIR /contracts
+
+COPY contract/ /contracts/
+
+EXPOSE 7545
+
+CMD ["ganache-cli", "-h", "0.0.0.0", "-p", "7545", "-d"]

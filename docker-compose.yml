@@ -10,7 +10,11 @@ services:
     command: python app/manage.py runserver 0.0.0.0:8000
 
   ganache:
-    image: trufflesuite/ganache-cli:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ganache
     ports:
       - "7545:7545"
+    volumes:
+      - ./contract/build/contracts:/contracts
     command: ganache-cli -h 0.0.0.0 -p 7545 -d
