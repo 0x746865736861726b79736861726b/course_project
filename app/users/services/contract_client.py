@@ -48,4 +48,12 @@ class ContractClient:
         return receipt
 
     def call_function(self, function_name, args):
+        """
+        Calls the given function on the contract with the given arguments.
+
+        :param str function_name: The name of the function to call
+        :param list args: The arguments to pass to the function
+        :return: The result of the function call
+        :rtype: Any
+        """
         return getattr(self.contract.functions, function_name)(*args).call()
