@@ -5,25 +5,40 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Users</h5>
-        <table class="table">
+        <table class="table table-responsive">
             <thead>
                 <tr>
                     <th scope="col">IDs</th>
                     <th scope="col">Address</th>
                     <th scope="col">Role</th>
                     <th scope="col">Created</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 
-                {% for user in users %}
+                {% if users %}
+                                        
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.account }}</td>
+                            <td>{{ user.role }}</td>
+                            <td>{{ user.created }}</td>
+                            <td><a href="" class="btn btn-primary btn-sm">Create</a></td>
+                            <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+                            <td><a href="" class="btn btn-secondary btn-sm">Update</a></td>
+                        </tr>
+                    {% endfor %}
+
+                {% else %}
                     <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.account }}</td>
-                        <td>{{ user.role }}</td>
-                        <td>{{ user.created }}</td>
+                        <td colspan="4">No users found</td>
+                        <td colspan="3"><a href="" class="btn btn-primary btn-sm">Create</a></td>
                     </tr>
-                {% endfor %}
+                {% endif %}
                     
             </tbody>
         </table>

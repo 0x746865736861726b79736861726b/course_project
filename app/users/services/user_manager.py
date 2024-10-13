@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from loguru import logger
 
 
@@ -53,11 +55,14 @@ class UserManager:
         for address, role, created, user_id in zip(
             user_addresses, user_roles, user_created, user_ids
         ):
+            created_human_readable = datetime.fromtimestamp(created).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
             user_details.append(
                 {
                     "account": address,
                     "role": role,
-                    "created": created,
+                    "created": created_human_readable,
                     "id": user_id.hex(),
                 }
             )
