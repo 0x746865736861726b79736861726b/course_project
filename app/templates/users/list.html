@@ -8,6 +8,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">IDs</th>
                     <th scope="col">Address</th>
                     <th scope="col">Role</th>
                     <th scope="col">Created</th>
@@ -17,8 +18,10 @@
                 
                 {% for user in users %}
                     <tr>
+                        <td>{{ user.id }}</td>
                         <td>{{ user.account }}</td>
                         <td>{{ user.role }}</td>
+                        <td>{{ user.created }}</td>
                     </tr>
                 {% endfor %}
                     

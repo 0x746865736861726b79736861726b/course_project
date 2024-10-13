@@ -65,7 +65,11 @@ class UserCreateView(View):
 
 class UserListView(View):
     def get(self, request):
+        """
+        GET request handler.
+
+        Returns a rendered page with a list of all users in the UsersContract.
+        """
         user_manager = get_user_manager()
         users = user_manager.get_all_users()
-        logger.info(f"User {users}")
         return render(request, "users/list.html", {"users": users})

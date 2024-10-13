@@ -1,3 +1,6 @@
+from loguru import logger
+
+
 class UserManager:
     def __init__(self, contract_client):
         """
@@ -38,10 +41,25 @@ class UserManager:
 
     def get_all_users(self):
         user_details = []
-        user_addresses, user_role = self.contract_client.call_function(
-            "getAllUsers", []
+
+        user_addresses, user_roles, user_created, user_ids = (
+            self.contract_client.call_function("getAllUsers", [])
         )
-        for address, role in zip(user_addresses, user_role):
-            user_details.append({"account": address, "role": role})
+
+        logger.info(
+            f"Getting all users {user_addresses}, {user_roles}, {user_created}, {user_ids}"
+        )
+
+        for address, role, created, user_id in zip(
+            user_addresses, user_roles, user_created, user_ids
+        ):
+            user_details.append(
+                {
+                    "account": address,
+                    "role": role,
+                    "created": created,
+                    "id": user_id.hex(),
+                }
+            )
 
         return user_details
