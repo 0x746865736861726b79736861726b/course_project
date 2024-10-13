@@ -27,7 +27,7 @@ contract UsersContract {
 
     event UserCreated(address indexed account, Roles role, bytes32 userId);
     event RoleAssigned(address indexed account, Roles role);
-    event UserUpdated(address indexed account, Roles role);  // Подія для оновлення
+    event UserUpdated(address indexed account, Roles role);
 
     constructor() {
         Owner = msg.sender;
