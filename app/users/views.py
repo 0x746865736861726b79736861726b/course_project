@@ -9,6 +9,8 @@ from loguru import logger
 from users.forms import UserCreateForm
 from users.factory import get_user_manager
 from users.factory import get_auth_service
+from users.exceptions.user_exceptions import UserNotRegisteredError
+from users.exceptions.signature_exeptions import InvalidSignatureError
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -20,17 +22,22 @@ class AuthenticateUserView(View):
         logger.info(
             f"Authenticating user {user_address} with signature {signature} and message {message}"
         )
+
         if not user_address or not signature or not message:
             return JsonResponse({"error": "Missing parameters"}, status=400)
 
         auth_service = get_auth_service()
 
-        role = auth_service.authenticate_user(user_address, signature, message)
-
-        if role is not None:
+        try:
+            role = auth_service.authenticate_user(user_address, signature, message)
             return JsonResponse({"role": role}, status=200)
-        else:
-            return JsonResponse({"error": "Authentication failed"}, status=401)
+        except InvalidSignatureError as e:
+            return JsonResponse({"error": str(e)}, status=400)
+        except UserNotRegisteredError as e:
+            return JsonResponse({"error": str(e)}, status=400)
+        except Exception as e:
+            logger.error(f"Unexpected error during authentication: {str(e)}")
+            return JsonResponse({"error": "An unexpected error occurred."}, status=500)
 
 
 class UserCreateView(View):
