@@ -4,6 +4,7 @@ from django.http import JsonResponse
 
 from loguru import logger
 
+from users.enum import UserRole
 from users.forms import UserCreateForm
 from users.factory import get_user_manager
 
@@ -72,4 +73,7 @@ class UserListView(View):
         """
         user_manager = get_user_manager()
         users = user_manager.get_all_users()
+        # TODO: this is not supossed to be here
+        for user in users:
+            user["role"] = UserRole(user["role"]).name
         return render(request, "users/list.html", {"users": users})
