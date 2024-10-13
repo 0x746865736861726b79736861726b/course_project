@@ -9,6 +9,8 @@ web3 = "*"
 psycopg2-binary = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+python-dotenv = "*"
+django-environ = "*"
 
 [dev-packages]
 

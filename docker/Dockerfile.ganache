@@ -1,9 +1,17 @@
+# Dockerfile.ganache
 FROM trufflesuite/ganache-cli:latest
 
 WORKDIR /contracts
 
+# Copy the contracts into the container
 COPY contract/ /contracts/
 
+# Expose Ganache port
 EXPOSE 7545
 
-CMD ["ganache-cli", "-h", "0.0.0.0", "-p", "7545", "-d"]
+# Copy the entrypoint script
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Use the entrypoint script to start Ganache and then migrate
+ENTRYPOINT ["/entrypoint.sh"]

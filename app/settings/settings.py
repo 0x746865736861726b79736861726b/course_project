@@ -11,10 +11,18 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+APPS_DIR = BASE_DIR / "app"
+env = environ.Env()
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
+if READ_DOT_ENV_FILE:
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(BASE_DIR / ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -159,6 +167,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-ETHEREUM_NODE_URL = ""
-CONTRACT_ABI_PATH = ""
-CONTRACT_ADDRESS = ""
+ETHEREUM_NODE_URL = env("ETHEREUM_NODE_URL")
+CONTRACT_ABI_PATH = env("CONTRACT_ABI_PATH")
+CONTRACT_ADDRESS = env("CONTRACT_ADDRESS")

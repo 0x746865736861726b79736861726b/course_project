@@ -26,7 +26,7 @@ class ContractClient:
                 "from": sender,
                 "nonce": nonce,
                 "gas": 2000000,
-                "gasPrice": self.connector.w3.toWei("20", "gwei"),
+                "gasPrice": self.connector.w3.to_wei("20", "gwei"),
             }
         )
         return transaction
@@ -43,7 +43,7 @@ class ContractClient:
         signed_tx = self.connector.w3.eth.account.sign_transaction(
             transaction, private_key=private_key
         )
-        tx_hash = self.connector.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        tx_hash = self.connector.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         receipt = self.connector.w3.eth.wait_for_transaction_receipt(tx_hash)
         return receipt
 
