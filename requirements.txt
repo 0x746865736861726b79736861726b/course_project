@@ -24,6 +24,7 @@ eth_abi==5.1.0
 frozenlist==1.4.1
 hexbytes==1.2.1
 idna==3.10
+loguru==0.7.2
 multidict==6.1.0
 parsimonious==0.10.0
 propcache==0.2.0
@@ -43,4 +44,4 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 web3==7.3.0
 websockets==13.1
-yarl==1.15.1
+yarl==1.15.2

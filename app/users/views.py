@@ -2,6 +2,8 @@ from django.views import View
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from loguru import logger
+
 from users.forms import UserCreateForm
 from users.factory import get_user_manager
 
@@ -59,3 +61,11 @@ class UserCreateView(View):
                 {"status": "error", "errors": form.errors},
                 status=400,
             )
+
+
+class UserListView(View):
+    def get(self, request):
+        user_manager = get_user_manager()
+        users = user_manager.get_all_users()
+        logger.info(f"User {users}")
+        return render(request, "users/list.html", {"users": users})

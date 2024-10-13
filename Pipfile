@@ -11,6 +11,7 @@ django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 python-dotenv = "*"
 django-environ = "*"
+loguru = "*"
 
 [dev-packages]
 

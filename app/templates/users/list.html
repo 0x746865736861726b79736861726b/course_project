@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Users</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Address</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.account }}</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+    

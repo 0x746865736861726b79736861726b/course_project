@@ -35,3 +35,13 @@ class UserManager:
         :rtype: int
         """
         return self.contract_client.call_function("getUserRole", [account])
+
+    def get_all_users(self):
+        user_details = []
+        user_addresses, user_role = self.contract_client.call_function(
+            "getAllUsers", []
+        )
+        for address, role in zip(user_addresses, user_role):
+            user_details.append({"account": address, "role": role})
+
+        return user_details
