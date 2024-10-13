@@ -1,1 +1,1 @@
-Just another application with django that utilize smart-contracts as a storage
+Just another application with django that utilize smart-contracts and ethereum blockchain as a storage. It's crazy but it is what it is
