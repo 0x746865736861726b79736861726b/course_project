@@ -27,6 +27,7 @@ contract UsersContract {
 
     event UserCreated(address indexed account, Roles role, bytes32 userId);
     event RoleAssigned(address indexed account, Roles role);
+    event UserUpdated(address indexed account, Roles role);  // Подія для оновлення
 
     constructor() {
         Owner = msg.sender;
@@ -52,6 +53,14 @@ contract UsersContract {
         require(users[_account].account != address(0), "User does not exist");
         users[_account].role = _role;
         emit RoleAssigned(_account, _role);
+    }
+
+    function updateUser(address _account, Roles _role) public onlyAdmin {
+        require(users[_account].account != address(0), "User does not exist");
+        require(_role != Roles.None, "Invalid role");
+
+        users[_account].role = _role;  
+        emit UserUpdated(_account, _role);
     }
 
     function removeUser(address _account) public onlyAdmin {

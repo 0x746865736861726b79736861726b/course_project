@@ -1,7 +1,7 @@
 from loguru import logger
 
 from users.enum import UserRole
-from users.utils import format_timestamp
+from users.utils.timestamp_formater import format_timestamp
 
 
 class UserManager:
