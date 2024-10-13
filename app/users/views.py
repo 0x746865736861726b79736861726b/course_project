@@ -73,7 +73,5 @@ class UserListView(View):
         """
         user_manager = get_user_manager()
         users = user_manager.get_all_users()
-        # TODO: this is not supossed to be here
-        for user in users:
-            user["role"] = UserRole(user["role"]).name
+
         return render(request, "users/list.html", {"users": users})
