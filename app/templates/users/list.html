@@ -21,7 +21,7 @@
                                     
                 {% for user in users %}
                     <tr>
-                        <td>{{ user.id }}</td>
+                        <td>{{ user.id|slice:":4" }}...{{ user.id|slice:"-4:" }}</td>
                         <td>{{ user.account }}</td>
                         <td>{{ user.role }}</td>
                         <td>{{ user.created }}</td>
