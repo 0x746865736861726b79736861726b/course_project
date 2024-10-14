@@ -11,6 +11,16 @@ services:
       - .:/app
     command: python app/manage.py runserver 0.0.0.0:8000
 
+  ipfs:
+    image: ipfs/go-ipfs
+    container_name: ipfs-node
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ./data/ipfs:/data/ipfs
+    restart: always
   # ganache:
   #   build:
   #     context: .
